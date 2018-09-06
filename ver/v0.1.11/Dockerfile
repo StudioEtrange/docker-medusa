@@ -14,7 +14,7 @@ ENV ITEM_VERSION v0.1.11
 
 WORKDIR /opt/medusa
 
-RUN curl -k -SL "https://github.co/pymedusa/Medusa/archive/$ITEM_VERSION.tar.gz" \
+RUN curl -k -SL "https://github.com/pymedusa/Medusa/archive/$ITEM_VERSION.tar.gz" \
 	| tar -xzf - -C /opt/medusa --strip-components=1
 
 
