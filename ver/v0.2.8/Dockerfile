@@ -10,7 +10,7 @@ RUN apt-get update \
 	
 
 # MEDUSA install -------------
-ENV ITEM_VERSION v0.2.9
+ENV ITEM_VERSION v0.2.8
 
 WORKDIR /opt/medusa
 
