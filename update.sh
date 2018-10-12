@@ -271,6 +271,7 @@ for rel in $releases; do
 	mkdir -p "ver/$version_number"
 	cp -f supervisord* "ver/$version_number"
 	cp -f Dockerfile "ver/$version_number/Dockerfile"
+	cp -f docker-entrypoint.sh "ver/$version_number/docker-entrypoint.sh"
 	update_dockerfile "ver/$version_number/Dockerfile" "$version_full_number"
 	echo
 done

@@ -4,6 +4,7 @@
 * Based on medusa github source code
 * Choice of medusa version
 * Use supervisor to manage medusa process
+* Can choose a specific unix user to run medusa inside docker
 * By default medusa configuration files will be in /data/medusa _(You should map a docker volume to /data)_
 
 
@@ -35,14 +36,13 @@ Current latest tag is version __v0.2.9__
 
 	docker pull studioetrange/docker-medusa
 
-### run medusa 
+### quick run 
 
-	docker run -v DATA_DIR:/data -p MEDUSA_HTTP_PORT:8081 -p SUPERVISOR_HTTP_WEB:9999 studioetrange/docker-medusa:MEDUSA_VERSION
+	docker run -d -P studioetrange/docker-medusa
+	
+### full run parameters
 
-### run medusa daemonized
-
-	docker run -d -v DATA_DIR:/data -p MEDUSA_HTTP_PORT:8081 -p SUPERVISOR_HTTP_WEB:9999 studioetrange/docker-medusa:MEDUSA_VERSION
-
+	docker run -d -v <local path>:/data -p <medusa http port>:8081 -e SERVICE_USER=<uid[:gid]>  -p <process manager http port>:9999 studioetrange/docker-medusa:<version>
 
 ### run a shell inside this container (without medusa running)
 
@@ -54,7 +54,7 @@ Current latest tag is version __v0.2.9__
 
 	Go to http://localhost:MEDUSA_HTTP_PORT/
 
-### Supervisor
+### Supervisor process manager
 
 	Go to http://localhost:SUPERVISOR_HTTP_WEB/
 
