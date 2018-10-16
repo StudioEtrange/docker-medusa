@@ -36,14 +36,17 @@ Current latest tag is version __v0.2.10__
 
 	docker pull studioetrange/docker-medusa
 
-### quick run 
+### standard usage 
 
-	docker run -d -v $(pwd):/data -p 8081:8081 -e SERVICE_USER=$(id -u):$(id -g) studioetrange/docker-medusa
+	docker run -d -v $(pwd):/data -v $(pwd)/tv:/tv -v -p 8081:8081 -e SERVICE_USER=$(id -u):$(id -g) -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro studioetrange/docker-medusa
 	
 ### full run parameters
 
-	docker run -d -v <local path>:/data -p <medusa http port>:8081 -e SERVICE_USER=<uid[:gid]>  -p <process manager http port>:9999 studioetrange/docker-medusa:<version>
+	docker run -d -v <local path>:/data -v <tv show path>:/tv -p <medusa http port>:8081 -e SERVICE_USER=<uid[:gid]>  -p <supervisor manager http port>:9999 studioetrange/docker-medusa:<version>
 
+	`/data/medusa` will contain medusa configuration and database
+	`/tv` is the root folder of your tv shows
+	
 ### run a shell inside this container (without medusa running)
 
 	docker run -i -t studioetrange/docker-medusa bash

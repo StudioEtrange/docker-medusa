@@ -74,8 +74,10 @@ COPY supervisord-${SERVICE_NAME}.conf /etc/supervisor/conf.d/supervisord-${SERVI
 
 # DOCKER RUN PARAMETERS ----------------------------------------------
 
-# data
+# will contain service data and configuration
 VOLUME /data
+# will contain root of tv show
+VOLUME /tv
 
 # supervisor web interface
 EXPOSE 9999
