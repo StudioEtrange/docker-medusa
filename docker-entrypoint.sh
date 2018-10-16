@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-# form arg1 : <uid:[gid]>
-# form arg2 : name
+# arg1 (mandatory) : <uid:[gid]> => wanted user/group ids
+# arg2 (mandatory) : name => wanted user name
 # return : user_uid:group_gid:user_name:group_name
 setup_service_user() {
   wanted_user="$1"
