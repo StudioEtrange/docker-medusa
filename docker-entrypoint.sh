@@ -110,7 +110,7 @@ if [ "$1" = "supervisord" ]; then
   export SERVICE_NAME="${SERVICE_NAME}"
   # export specific arg for service
   for a in ${SERVICE_EXPORT_ARG}; do
-    export ${a}=${!a}
+    export ${a}="${!a}"
   done
 
   # volume path

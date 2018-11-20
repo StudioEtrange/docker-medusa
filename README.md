@@ -12,7 +12,7 @@
 
 for running latest stable version of medusa :
 
-	docker run -d -v $(pwd):/data -v $(pwd)/tv:/tv -p 8081:8081 studioetrange/docker-medusa
+	docker run -d -v $(pwd):/data -p 8081:8081 studioetrange/docker-medusa
 
 then go to http://localhost:8081
 
@@ -38,14 +38,16 @@ Current latest tag is version __v0.2.12__
 
 ### standard usage
 
+	mkdir -p tv
 	docker run -d -v $(pwd):/data -v $(pwd)/tv:/tv -p 8081:8081 -e SERVICE_USER=$(id -u):$(id -g) -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro studioetrange/docker-medusa
 
 ### full run parameters
 
 	docker run --name medusa -d -v <local path>:/data -v <tv show path>:/tv -p <medusa http port>:8081 -e SERVICE_USER=<uid[:gid]>  -p <supervisor manager http port>:9999 studioetrange/docker-medusa:<version>
 
-	`/data/medusa` will contain medusa configuration and database
-	`/tv` is the root folder of your tv shows
+Inside container
+`/data/medusa` will contain medusa configuration and database
+`/tv` is the root folder of your tv shows
 
 ### access supervisor control inside a running instance
 
