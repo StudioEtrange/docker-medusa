@@ -4,15 +4,21 @@ LABEL description "Medusa on docker"
 
 # PARAMETERS -------------------------------------------------------
 
-# Service parameters
+# Service generic parameters
 ENV SERVICE_NAME medusa
 ENV SERVICE_VERSION v0.1.13
 # User id which will launch the service start command (NOTE : supervisord itself is run with root)
 ENV SERVICE_USER 0
 ENV SERVICE_PORT 8081
 ENV SERVICE_INSTALL_DIR /opt/${SERVICE_NAME}
-ENV SERVICE_DATA_PATH /data/${SERVICE_NAME}
 
+# Specific service parameters
+# path to store service data and configuration
+ENV SERVICE_DATA_PATH /data/${SERVICE_NAME}
+# external paths used by service
+ENV SERVICE_VOLUME_PATH ${SERVICE_DATA_PATH} /tv
+# args used by supervisor context for running service
+ENV SERVICE_EXPORT_ARG SERVICE_DATA_PATH
 
 # System parameters
 ENV PYTHON_MAJOR_VERSION 2
@@ -40,8 +46,8 @@ RUN apt-get update \
 					    ca-certificates curl wget openssl libssl-dev bzip2 unrar-free \
 					    mediainfo \
 	&& rm -rf /var/lib/apt/lists/*
-	
-	
+
+
 # Python
 RUN MINICONDA_FILE=Miniconda${PYTHON_MAJOR_VERSION}-${MINICONDA_VERSION}-Linux-x86_64.sh && \
     wget https://repo.continuum.io/miniconda/${MINICONDA_FILE} -O /opt/${MINICONDA_FILE} && \
@@ -57,12 +63,8 @@ RUN bash -c "source activate ${CONDA_ENV} && \
                 pip install supervisor==3.3.4"
 
 # SERVICE INSTALL -------------------------------------------------------
-
-# home folder of user used to run the service TODO
-#RUN mkdir -p /home/${SERVICE_NAME}
-
 RUN curl -k -SL "https://github.com/pymedusa/Medusa/archive/${SERVICE_VERSION}.tar.gz" \
-	| tar -xzf - -C /opt/${SERVICE_NAME} --strip-components=1
+	| tar -xzf - -C ${SERVICE_INSTALL_DIR} --strip-components=1
 
 
 # SUPERVISOR -------------------------------------------------------
@@ -73,9 +75,10 @@ COPY supervisord-${SERVICE_NAME}.conf /etc/supervisor/conf.d/supervisord-${SERVI
 
 
 # DOCKER RUN PARAMETERS ----------------------------------------------
-
-# data
+# will contain service data and configuration
 VOLUME /data
+# will contain root of tv show
+VOLUME /tv
 
 # supervisor web interface
 EXPOSE 9999
@@ -90,4 +93,3 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 
 # default command
 CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf", "-n"]
-
