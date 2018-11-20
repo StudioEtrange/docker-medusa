@@ -42,14 +42,18 @@ Current latest tag is version __v0.2.12__
 
 ### full run parameters
 
-	docker run -d -v <local path>:/data -v <tv show path>:/tv -p <medusa http port>:8081 -e SERVICE_USER=<uid[:gid]>  -p <supervisor manager http port>:9999 studioetrange/docker-medusa:<version>
+	docker run --name medusa -d -v <local path>:/data -v <tv show path>:/tv -p <medusa http port>:8081 -e SERVICE_USER=<uid[:gid]>  -p <supervisor manager http port>:9999 studioetrange/docker-medusa:<version>
 
 	`/data/medusa` will contain medusa configuration and database
 	`/tv` is the root folder of your tv shows
 
+### access supervisor control inside a running instance
+
+	docker exec -it medusa bash -c ". activate medusa && supervisorctl"
+
 ### test a shell inside a new container without medusa running
 
-	docker run -i -t studioetrange/docker-medusa bash
+	docker run -it studioetrange/docker-medusa bash
 
 ## Access point
 
