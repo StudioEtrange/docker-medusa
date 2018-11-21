@@ -26,34 +26,39 @@ Current latest tag is version __v0.2.12__
 
 ## Instruction
 
-### build from github source
+### Build from github source
 
 	git pull https://github.com/StudioEtrange/docker-medusa
 	cd docker-medusa
 	docker build -t=studioetrange/docker-medusa .
 
-### retrieve image from docker registry
+### Retrieve image from docker registry
 
 	docker pull studioetrange/docker-medusa
 
-### standard usage
+### Standard usage
 
 	mkdir -p tv
-	docker run -d -v $(pwd):/data -v $(pwd)/tv:/tv -p 8081:8081 -e SERVICE_USER=$(id -u):$(id -g) -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro studioetrange/docker-medusa
+	mkdir -p data
+	docker run -d -v $(pwd)/data:/data -v $(pwd)/tv:/tv -p 8081:8081 -e SERVICE_USER=$(id -u):$(id -g) -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro studioetrange/docker-medusa
 
-### full run parameters
+### Full run parameters
 
-	docker run --name medusa -d -v <local path>:/data -v <tv show path>:/tv -p <medusa http port>:8081 -e SERVICE_USER=<uid[:gid]>  -p <supervisor manager http port>:9999 studioetrange/docker-medusa:<version>
+	docker run --name medusa -d -v <data path>:/data -v <tv show path>:/tv -p <medusa http port>:8081 -e SERVICE_USER=<uid[:gid]>  -p <supervisor manager http port>:9999 studioetrange/docker-medusa:<version>
+
+### Volumes
 
 Inside container
 `/data/medusa` will contain medusa configuration and database
 `/tv` is the root folder of your tv shows
 
-### access supervisor control inside a running instance
+If host `<data path>` or `<tv show path>` does not exist, docker will create it automaticly with root user. You should use mkdir before launching docker to control ownership.
+
+### Access supervisor control inside a running instance
 
 	docker exec -it medusa bash -c ". activate medusa && supervisorctl"
 
-### test a shell inside a new container without medusa running
+### Test a shell inside a new container without medusa running
 
 	docker run -it studioetrange/docker-medusa bash
 
@@ -73,4 +78,4 @@ Inside container
 
 	https://registry.hub.docker.com/u/studioetrange/docker-medusa/
 
-* _update.sh_ is only an admin script which update and add new versions. This script do not auto create missing tag in docker hub webui. It is only for admin/owner purpose.
+* _update.sh_ is only an admin script for this project which update and add new versions. This script do not auto create missing tag in docker hub webui. It is only for this project admin/owner purpose.
