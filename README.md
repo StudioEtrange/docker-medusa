@@ -5,7 +5,7 @@
 * Choice of medusa version
 * Use supervisor to manage medusa process
 * Can choose a specific unix user to run medusa inside docker
-* By default medusa configuration files will be in /data/medusa _(You should map a docker volume to /data)_
+* By default medusa configuration files will be in a folder named 'medusa' which will be contained in a docker volume /data
 
 
 ## Quick Usage
