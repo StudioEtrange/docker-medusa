@@ -1,7 +1,7 @@
 # docker medusa by StudioEtrange
 
 * Run medusa inside a docker container built upon debian
-* Based on medusa github source code
+* Based on medusa github repository
 * Choice of medusa version
 * Use supervisor to manage medusa process
 * Can choose a specific unix user to run medusa inside docker
@@ -40,11 +40,11 @@ Current latest tag is version __v0.2.13__
 
 	mkdir -p tv
 	mkdir -p data
-	docker run -d -v $(pwd)/data:/data -v $(pwd)/tv:/tv -p 8081:8081 -e SERVICE_USER=$(id -u):$(id -g) -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro studioetrange/docker-medusa
+	docker run --name medusa -d -v $(pwd)/data:/data -v $(pwd)/tv:/tv -p 8081:8081 -e SERVICE_USER=$(id -u):$(id -g) -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro studioetrange/docker-medusa
 
 ### Full run parameters
 
-	docker run --name medusa -d -v <data path>:/data -v <tv show path>:/tv -p <medusa http port>:8081 -e SERVICE_USER=<uid[:gid]>  -p <supervisor manager http port>:9999 studioetrange/docker-medusa:<version>
+	docker run --name medusa -d -v <data path>:/data -v <tv show path>:/tv -p <medusa http port>:8081 -e SERVICE_USER=<uid[:gid]>  -p <supervisor manager http port>:9999 -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro studioetrange/docker-medusa:<version>
 
 ### Volumes
 
