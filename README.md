@@ -6,7 +6,7 @@
 * Use supervisor to manage medusa process
 * Can choose a specific unix user to run medusa inside docker
 * By default medusa configuration files will be in a folder named 'medusa' which will be contained in a docker volume /data
-
+* Optional volume 'tv' used as tv root folder
 
 ## Quick Usage
 
@@ -49,7 +49,7 @@ Current latest tag is version __v0.2.13__
 ### Volumes
 
 Inside container
-`/data/medusa` will contain medusa configuration and database
+`/data/medusa` will contain medusa configuration and files
 `/tv` is the root folder of your tv shows
 
 If host `<data path>` or `<tv show path>` does not exist, docker will create it automaticly with root user. You should use mkdir before launching docker to control ownership.
@@ -64,7 +64,7 @@ If host `<data path>` or `<tv show path>` does not exist, docker will create it 
 
 ## Access point
 
-### Medusa
+### medusa
 
 	Go to http://localhost:MEDUSA_HTTP_PORT/
 

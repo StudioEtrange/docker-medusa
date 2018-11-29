@@ -18,7 +18,7 @@ ENV SERVICE_DATA_PATH /data/${SERVICE_NAME}
 # external paths used by service
 ENV SERVICE_VOLUME_PATH ${SERVICE_DATA_PATH} /tv
 # args used by supervisor context for running service
-ENV SERVICE_EXPORT_ARG SERVICE_DATA_PATH
+ENV SERVICE_EXPORT_ARG SERVICE_DATA_PATH SERVICE_INSTALL_DIR
 
 # System parameters
 ENV PYTHON_MAJOR_VERSION 2
@@ -43,10 +43,17 @@ RUN echo "deb http://httpredir.debian.org/debian stretch main non-free" >> /etc/
 
 RUN apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-					    ca-certificates curl wget openssl libssl-dev bzip2 unrar-free \
+					    ca-certificates curl wget openssl libssl-dev bzip2 unrar-free locales \
 					    mediainfo \
 	&& rm -rf /var/lib/apt/lists/*
 
+# locales
+# https://stackoverflow.com/a/38553499
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=en_US.UTF-8
+
+ENV LANG en_US.UTF-8 
 
 # Python
 RUN MINICONDA_FILE=Miniconda${PYTHON_MAJOR_VERSION}-${MINICONDA_VERSION}-Linux-x86_64.sh && \
