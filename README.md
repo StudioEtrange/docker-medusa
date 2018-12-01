@@ -58,11 +58,11 @@ If any path of theses volumes do not exist on the host while your are mounting t
 
 ### Access to a running instance
 
-* Supervisorctl access
+supervisorctl access
 
 	docker exec -it medusa bash -c ". activate medusa && supervisorctl"
 	
-* Bash access
+bash access
 
 	docker exec -it medusa bash -c ". activate medusa"
  
