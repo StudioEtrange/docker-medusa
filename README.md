@@ -12,7 +12,7 @@
 
 for running latest stable version of medusa :
 
-	docker run -d -v $(pwd):/data -p 8081:8081 studioetrange/docker-medusa
+	docker --name medusa run -d -v $(pwd):/data -p 8081:8081 studioetrange/docker-medusa
 
 then go to http://localhost:8081
 
@@ -40,24 +40,36 @@ Current latest tag is version __v0.2.13__
 
 	mkdir -p tv
 	mkdir -p data
-	docker run --name medusa -d -v $(pwd)/data:/data -v $(pwd)/tv:/tv -p 8081:8081 -e SERVICE_USER=$(id -u):$(id -g) -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro studioetrange/docker-medusa
+	mkdir -p download
+	docker run --name medusa -d -v $(pwd)/data:/data -v $(pwd)/tv:/tv -v $(pwd)/download:/download -p 8081:8081 -e SERVICE_USER=$(id -u):$(id -g) -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro studioetrange/docker-medusa
 
 ### Full run parameters
 
-	docker run --name medusa -d -v <data path>:/data -v <tv show path>:/tv -p <medusa http port>:8081 -e SERVICE_USER=<uid[:gid]>  -p <supervisor manager http port>:9999 -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro studioetrange/docker-medusa:<version>
+	docker run --name medusa -d -v <data path>:/data -v <tv show path>:/tv -v <download show path>:/download -p <medusa http port>:8081 -e SERVICE_USER=<uid[:gid]>  -p <supervisor manager http port>:9999 -v /etc/timezone:/etc/timezone:ro -v /etc/localtime:/etc/localtime:ro studioetrange/docker-medusa:<version>
 
 ### Volumes
 
 Inside container
 `/data/medusa` will contain medusa configuration and files
 `/tv` is the root folder of your tv shows
+`/download` is the root folder of your downloads files from other software
 
-If host `<data path>` or `<tv show path>` does not exist, docker will create it automaticly with root user. You should use mkdir before launching docker to control ownership.
+If any path of theses volumes do not exist on the host while your are mounting them inside container, docker will create it automaticly with root user. You should use mkdir before launching docker to control ownership.
 
-### Access supervisor control inside a running instance
+### Access to a running instance
+
+* Supervisorctl access
 
 	docker exec -it medusa bash -c ". activate medusa && supervisorctl"
+	
+* Bash access
 
+	docker exec -it medusa bash -c ". activate medusa"
+ 
+### Stop and destroy all previously launched services
+
+	docerk stop medusa && docker rm medusa
+	
 ### Test a shell inside a new container without medusa running
 
 	docker run -it studioetrange/docker-medusa bash
