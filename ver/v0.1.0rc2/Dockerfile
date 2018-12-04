@@ -16,7 +16,7 @@ ENV SERVICE_INSTALL_DIR /opt/${SERVICE_NAME}
 # path to store service data and configuration
 ENV SERVICE_DATA_PATH /data/${SERVICE_NAME}
 # external paths used by service
-ENV SERVICE_VOLUME_PATH ${SERVICE_DATA_PATH} /tv
+ENV SERVICE_VOLUME_PATH ${SERVICE_DATA_PATH} /download /tv
 # args used by supervisor context for running service
 ENV SERVICE_EXPORT_ARG SERVICE_DATA_PATH SERVICE_INSTALL_DIR
 
@@ -86,6 +86,8 @@ COPY supervisord-${SERVICE_NAME}.conf /etc/supervisor/conf.d/supervisord-${SERVI
 VOLUME /data
 # will contain root of tv show
 VOLUME /tv
+# will contain downloads
+VOLUME /download
 
 # supervisor web interface
 EXPOSE 9999
