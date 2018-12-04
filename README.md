@@ -66,13 +66,13 @@ bash access
 
 	docker exec -it medusa bash -c ". activate medusa"
  
-### Stop and destroy all previously launched services
-
-	docerk stop medusa && docker rm medusa
-	
 ### Test a shell inside a new container without medusa running
 
-	docker run -it studioetrange/docker-medusa bash
+	docker run -it --rm studioetrange/docker-medusa bash
+	
+### Stop and destroy all previously launched services
+
+	docker stop medusa && docker rm medusa
 
 ## Access point
 
