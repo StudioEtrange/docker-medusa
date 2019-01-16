@@ -11,8 +11,9 @@
 ## Quick Usage
 
 for running latest stable version of medusa :
-
-	docker --name medusa run -d -v $(pwd):/data -p 8081:8081 studioetrange/docker-medusa
+	
+	mkdir -p data
+	docker --name medusa run -d -v $(pwd)/data:/data -p 8081:8081 studioetrange/docker-medusa
 
 then go to http://localhost:8081
 
