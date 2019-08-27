@@ -1,6 +1,6 @@
 # docker medusa by StudioEtrange
 
-* Run medusa inside a docker container built upon debian
+* Run medusa https://github.com/pymedusa/Medusa inside a docker container built upon debian
 * Based on medusa github repository
 * Choice of medusa version
 * Use supervisor to manage medusa process

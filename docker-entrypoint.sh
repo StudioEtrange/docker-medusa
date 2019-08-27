@@ -116,7 +116,7 @@ if [ "$1" = "supervisord" ]; then
   # change service folder ownership
   chown -R ${SERVICE_USER_NAME}:${SERVICE_GROUP_NAME} ${SERVICE_INSTALL_DIR}
 
-  
+
   # volume path
   # if not exist, create path using service user name
   for p in ${SERVICE_VOLUME_PATH}; do
