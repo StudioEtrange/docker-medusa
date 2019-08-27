@@ -6,7 +6,7 @@ LABEL description "Medusa on docker"
 
 # Service generic parameters
 ENV SERVICE_NAME medusa
-ENV SERVICE_VERSION v0.3.4
+ENV SERVICE_VERSION v0.1.2
 # User id which will launch the service start command (NOTE : supervisord itself is run with root)
 ENV SERVICE_USER 0
 ENV SERVICE_PORT 8081
