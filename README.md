@@ -11,11 +11,12 @@
 ## Quick Usage
 
 for running latest stable version of medusa :
-	
+
 	mkdir -p data
-	docker --name medusa run -d -v $(pwd)/data:/data -p 8081:8081 studioetrange/docker-medusa
+	docker run --name medusa -d -v $(pwd)/data:/data -p 8081:8081 studioetrange/docker-medusa
 
 then go to http://localhost:8081
+
 
 ## Docker tags
 
@@ -62,15 +63,15 @@ If any path of theses volumes do not exist on the host while your are mounting t
 supervisorctl access
 
 	docker exec -it medusa bash -c ". activate medusa && supervisorctl"
-	
+
 bash access
 
 	docker exec -it medusa bash -c ". activate medusa"
- 
+
 ### Test a shell inside a new container without medusa running
 
 	docker run -it --rm studioetrange/docker-medusa bash
-	
+
 ### Stop and destroy all previously launched services
 
 	docker stop medusa && docker rm medusa
