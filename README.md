@@ -20,7 +20,7 @@ then go to http://localhost:8081
 
 ## Docker tags
 
-Available tag for studioetrange/docker-medusa:__TAG__
+Pre-setted buildable docker tags for studioetrange/docker-medusa:__TAG__
 
 	latest, v0.4.3, v0.4.2, v0.4.1, v0.4.0, v0.3.16
 
