@@ -163,7 +163,7 @@ fi
 
 echo " * Create release ${last_release}"
 echo " ** Docker tag : latest"
-update_dockerfile "${_CURRENT_FILE_DIR}/Dockerfile" ""
+update_dockerfile "${_CURRENT_FILE_DIR}/Dockerfile" "${last_release}"
 
 
 echo
