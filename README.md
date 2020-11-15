@@ -22,9 +22,9 @@ then go to http://localhost:8081
 
 Pre-setted buildable docker tags for studioetrange/docker-medusa:__TAG__
 
-	latest, v0.4.3, v0.4.2, v0.4.1, v0.4.0, v0.3.16
+	latest, v0.4.5, v0.4.4, v0.4.3, v0.4.2, v0.4.1, v0.4.0, v0.3.16
 
-Current latest tag is version __v0.4.3__
+Current latest tag is version __v0.4.5__
 
 ## Instruction
 
