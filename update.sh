@@ -20,7 +20,8 @@ VERSION_INVERSE_LAST_CHAR="ON"
 USE_TAG_AS_RELEASE="0"
 
 # exclude some unwanted/malformed tag/release name
-EXCLUDE_VERSION=""
+# v.0.4.6 tag is malformed it should be v0.4.6
+EXCLUDE_VERSION="v.0.4.6"
 
 # see filter_version_list doc in https://github.com/StudioEtrange/stella/blob/stable/nix/common/common.sh
 VERSION_CONSTRAINT=">=v0.3.16"
