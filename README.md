@@ -58,6 +58,10 @@ Inside container
 
 If any path of theses volumes do not exist on the host while your are mounting them inside container, docker will create it automaticly with root user. You should use mkdir before launching docker to control ownership.
 
+### Python
+
+Last python2 version is 0.4.6. Versions >= 0.5.0 needs python3
+
 ### Access to a running instance
 
 supervisorctl access
